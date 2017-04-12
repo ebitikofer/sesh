@@ -43,11 +43,20 @@
 )
 
 ;product - a function that takes two lists as parameters and returns all possible pairs of the of the two sets.
-;(define (product lst1 lst2)
-  ;if lst1 = null
-    ;return
-  ;else
-;) ;analyze
+(define (product lst1 lst2) ;define
+  (cond ;condition check
+    ((null? lst1) '()) ;if list 1 is null print null
+    ((null? lst2) '()) ;if list 2 is null print null
+    (else (append (producer (car lst1) lst2) (product (cdr lst1) lst2))) ;else print a list of pairs with the current element and move to the rest of the list
+  )
+)
+
+(define (producer el lst) ;define helper
+  (cond ;condition check
+    ((null? (cdr lst)) (list el (car lst))) ;if the rest of the list is null print last pair
+    (else (list (list el (car lst)) (producer el (cdr lst)))) ;else print a pair and move to the rest of the list
+  )
+)
 
 ;remove-duplicates - a function that removes all duplicates from a list
 ;(define (remove-duplicates lst) ;define
@@ -81,11 +90,8 @@
   ;(load "f.scm")
 
   ;Example:
-    ;(create-pairs '(1 2 3) '(a b c)) ;returns ((1 a) (2 b) (3 c))
-    ;(create-pairs '() '()) ;returns '()
-    ;(create-pairs '(1 2) '(a b c)) ;returns '()
-  ;Example:
-    ;(product '(1 2) '(a b)) ;returns ((1 a) (1 b) (2 a) (2 b))
+    ;(product '(1 2) '(a b))
+    ;returns ((1 a) (1 b) (2 a) (2 b))
   ;Examples:
     ;(remove-duplicates '(1 2 2 1 1 1 3 3 3 4 2 5))
     ;returns (1 2 3 4 5)
